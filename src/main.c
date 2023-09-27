@@ -24,7 +24,6 @@
 
 #include "../res/res.h"
 #include "dlgproc.h"
-#include "strings.h"
 
 HINSTANCE hInst;
 
@@ -39,10 +38,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		return 0;
 
 	hInst = hInstance;
-	BC2StringsLoad();
-
 	DialogBoxW(hInstance, MAKEINTRESOURCEW(IDD_BMI), NULL, DlgProc);
-
 	ReleaseMutex(hMutex);
 
 	return 0;

@@ -98,6 +98,8 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 
 	case WM_INITDIALOG:
+		/* Strings */
+		BC2StringsLoad();
 		/* Background */
 		hBrush = CreateSolidBrush(BG_COLOR);
 		/* Icon */
@@ -123,7 +125,7 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				newWindowHeight,
 				SWP_NOMOVE | SWP_NOZORDER);
 		}
-		/* Text boxes limit (universal for both unit systems) */
+		/* Text boxes limits (universal for both unit systems) */
 		SendDlgItemMessageW(hWnd, IDC_HEIGHT2, EM_SETLIMITTEXT, 2, 0);
 		SendDlgItemMessageW(hWnd, IDC_MASS, EM_SETLIMITTEXT, 3, 0);
 
