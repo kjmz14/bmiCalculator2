@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 
-project(bmiCalculator2 VERSION 1.0.5)
+project(bmiCalculator2 VERSION 1.0.6)
 
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -30,7 +30,6 @@ target_sources(
 add_compile_definitions(
         UNICODE # Macros use Unicode (W) versions of Windows API functions
         WIN32_LEAN_AND_MEAN # Strips windows.h from rarely used parts
-        NOMINMAX # Prevents redefinition of min() and max() which are parts of std
 )
 
 configure_file(
