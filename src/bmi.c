@@ -27,7 +27,7 @@
 
 UNITS_TYPE BMIUnits = BMIMetric;
 
-double BMICalculate(BMIHeightStruct height, unsigned int mass)
+double BMICalculate(BMIHeightStruct height, BMIMassStruct mass)
 {
 
 	double dInches;
@@ -38,7 +38,7 @@ double BMICalculate(BMIHeightStruct height, unsigned int mass)
 			return 0;
 
 		double m = (double)height.cmFt / 100;
-		return (double)mass / pow(m, 2);
+		return (double)mass.kgLbsSt / pow(m, 2);
 	}
 
 	height.in += 12 * height.cmFt;
@@ -46,7 +46,13 @@ double BMICalculate(BMIHeightStruct height, unsigned int mass)
 	if (height.in == 0)
 		return 0;
 
+	if (BMIUnits == BMIImperialUK)
+	{
+		mass.kgLbsSt *= 14;
+		mass.kgLbsSt += mass.lbs;
+	}
+
 	dInches = (double)height.in;
-	return 703 * (double)mass / pow(dInches, 2);
+	return 703 * (double)mass.kgLbsSt / pow(dInches, 2);
 
 }

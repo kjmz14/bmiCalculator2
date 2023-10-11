@@ -25,8 +25,9 @@
 #include "strings.h"
 #include "../res/res.h"
 
-STRING strCm, strKg, strFt, strLbs,
-	strValue, strIncorrect;
+STRING strCm, strKg, strFt,
+	strLbs, strSt, strValue,
+	strIncorrect;
 
 extern HINSTANCE hInst;
 
@@ -39,6 +40,7 @@ void BC2StringsLoad()
 	LOAD_STR(IDS_KG, strKg);
 	LOAD_STR(IDS_FT, strFt);
 	LOAD_STR(IDS_LBS, strLbs);
+	LOAD_STR(IDS_ST, strSt);
 	LOAD_STR(IDS_VALUE, strValue);
 	LOAD_STR(IDS_INCORRECT, strIncorrect);
 

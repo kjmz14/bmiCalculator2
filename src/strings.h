@@ -29,8 +29,9 @@
 
 typedef WCHAR STRING[21];
 
-extern STRING strCm, strKg, strFt, strLbs,
-	strValue, strIncorrect;
+extern STRING strCm, strKg, strFt,
+	strLbs, strSt, strValue,
+	strIncorrect;
 
 void BC2StringsLoad();
 

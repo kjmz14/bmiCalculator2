@@ -30,8 +30,9 @@
 #define IDS_KG 302
 #define IDS_FT 303
 #define IDS_LBS 304
-#define IDS_VALUE 305
-#define IDS_INCORRECT 306
+#define IDS_ST 305
+#define IDS_VALUE 306
+#define IDS_INCORRECT 307
 
 /* Dialog */
 #define IDD_BMI 501
@@ -42,8 +43,10 @@
 #define IDC_HEIGHT1_LABEL 503
 #define IDC_HEIGHT2 504
 #define IDC_HEIGHT2_LABEL 505
-#define IDC_MASS 506
-#define IDC_MASS_LABEL 507
+#define IDC_MASS1 506
+#define IDC_MASS1_LABEL 507
+#define IDC_MASS2 508
+#define IDC_MASS2_LABEL 509
 
 /* About */
 #define IDC_DUMMY1 510
@@ -55,8 +58,9 @@
 /* Menu */
 #define IDM_BMI 100
 #define IDM_METRIC 101
-#define IDM_IMPERIAL 102
-#define IDM_ABOUT 103
+#define IDM_IMPERIAL_US 102
+#define IDM_IMPERIAL_UK 103
+#define IDM_ABOUT 104
 
 /* Icons */
 #define IDI_ICON_GROUP 200

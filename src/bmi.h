@@ -27,16 +27,22 @@
 
 typedef enum
 {
-	BMIMetric, BMIImperial
+	BMIMetric, BMIImperialUS, BMIImperialUK
 } UNITS_TYPE;
 
 extern UNITS_TYPE BMIUnits;
 
 typedef struct
 {
-	unsigned int cmFt, in;
+	unsigned long cmFt, in;
 } BMIHeightStruct;
 
-double BMICalculate(BMIHeightStruct, unsigned int);
+/* Second field is used only in Imperial (UK) mode */
+typedef struct
+{
+	unsigned long kgLbsSt, lbs;
+} BMIMassStruct;
+
+double BMICalculate(BMIHeightStruct, BMIMassStruct);
 
 #endif /* BMICALCULATOR2_BMI_H */

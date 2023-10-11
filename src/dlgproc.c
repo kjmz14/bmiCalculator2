@@ -36,17 +36,26 @@ extern HINSTANCE hInst;
 static void updateMenu(HMENU hMenu)
 {
 
-	int toCheck = IDM_METRIC,
-		toUncheck = IDM_IMPERIAL;
+	CheckMenuItem(hMenu, IDM_METRIC, MF_UNCHECKED);
+	CheckMenuItem(hMenu, IDM_IMPERIAL_US, MF_UNCHECKED);
+	CheckMenuItem(hMenu, IDM_IMPERIAL_UK, MF_UNCHECKED);
 
-	if (BMIUnits == BMIImperial)
+	switch (BMIUnits)
 	{
-		toCheck = IDM_IMPERIAL;
-		toUncheck = IDM_METRIC;
-	}
 
-	CheckMenuItem(hMenu, toCheck, MF_CHECKED);
-	CheckMenuItem(hMenu, toUncheck, MF_UNCHECKED);
+	case BMIMetric:
+		CheckMenuItem(hMenu, IDM_METRIC, MF_CHECKED);
+		break;
+
+	case BMIImperialUS:
+		CheckMenuItem(hMenu, IDM_IMPERIAL_US, MF_CHECKED);
+		break;
+
+	case BMIImperialUK:
+		CheckMenuItem(hMenu, IDM_IMPERIAL_UK, MF_CHECKED);
+		break;
+
+	}
 
 }
 
@@ -55,30 +64,58 @@ static void clearTextBoxes(HWND hWnd)
 
 	SetDlgItemTextW(hWnd, IDC_HEIGHT1, NULL);
 	SetDlgItemTextW(hWnd, IDC_HEIGHT2, NULL);
-	SetDlgItemTextW(hWnd, IDC_MASS, NULL);
+	SetDlgItemTextW(hWnd, IDC_MASS1, NULL);
+	SetDlgItemTextW(hWnd, IDC_MASS2, NULL);
 
 }
 
 static void updateControls(HWND hWnd)
 {
 
-	HWND hHeight2Box = GetDlgItem(hWnd, IDC_HEIGHT2);
-	HWND hHeight2Label = GetDlgItem(hWnd, IDC_HEIGHT2_LABEL);
+	HWND hHeight2Box = GetDlgItem(hWnd, IDC_HEIGHT2),
+		hHeight2Label = GetDlgItem(hWnd, IDC_HEIGHT2_LABEL),
+		hMass2Box = GetDlgItem(hWnd, IDC_MASS2),
+		hMass2Label = GetDlgItem(hWnd, IDC_MASS2_LABEL);
 
 	clearTextBoxes(hWnd);
 
-	if (BMIUnits == BMIMetric)
+	/* Only Imperial (UK) uses these */
+	if (BMIUnits != BMIImperialUK)
 	{
+		ShowWindow(hMass2Box, SW_HIDE);
+		ShowWindow(hMass2Label, SW_HIDE);
+	}
+	else
+	{
+		SetDlgItemTextW(hWnd, IDC_MASS1_LABEL, strSt);
+		ShowWindow(hMass2Box, SW_SHOW);
+		ShowWindow(hMass2Label, SW_SHOW);
+		goto skipSwitch;
+	}
+
+	switch (BMIUnits)
+	{
+
+	case BMIMetric:
 		SetDlgItemTextW(hWnd, IDC_HEIGHT1_LABEL, strCm);
-		SetDlgItemTextW(hWnd, IDC_MASS_LABEL, strKg);
+		SetDlgItemTextW(hWnd, IDC_MASS1_LABEL, strKg);
 		SendDlgItemMessageW(hWnd, IDC_HEIGHT1, EM_SETLIMITTEXT, 3, 0);
 		ShowWindow(hHeight2Box, SW_HIDE);
 		ShowWindow(hHeight2Label, SW_HIDE);
 		return;
+
+	case BMIImperialUS:
+		SetDlgItemTextW(hWnd, IDC_MASS1_LABEL, strLbs);
+		break;
+
+	default:
+		break;
+
 	}
-	/* else */
+
+skipSwitch:
+	/* Common for Imperial (US) and Imperial (UK) */
 	SetDlgItemTextW(hWnd, IDC_HEIGHT1_LABEL, strFt);
-	SetDlgItemTextW(hWnd, IDC_MASS_LABEL, strLbs);
 	SendDlgItemMessageW(hWnd, IDC_HEIGHT1, EM_SETLIMITTEXT, 1, 0);
 	ShowWindow(hHeight2Box, SW_SHOW);
 	ShowWindow(hHeight2Label, SW_SHOW);
@@ -127,7 +164,8 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		/* Text boxes limits (universal for both unit systems) */
 		SendDlgItemMessageW(hWnd, IDC_HEIGHT2, EM_SETLIMITTEXT, 2, 0);
-		SendDlgItemMessageW(hWnd, IDC_MASS, EM_SETLIMITTEXT, 3, 0);
+		SendDlgItemMessageW(hWnd, IDC_MASS1, EM_SETLIMITTEXT, 3, 0);
+		SendDlgItemMessageW(hWnd, IDC_MASS2, EM_SETLIMITTEXT, 2, 0);
 
 		updateMenu(hMenu);
 		updateControls(hWnd);
@@ -162,37 +200,35 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case IDOK:
 		{
 			BMIHeightStruct heightStruct;
-			WCHAR height1[4], height2[3], massBox[4], bmiValueStr[5];
-			unsigned int mass;
+			BMIMassStruct massStruct;
+			WCHAR height1[4], height2[3], mass1[4], mass2[2], bmiValueStr[5];
 			double bmiValue;
-
-			ZeroMemory(&heightStruct, sizeof(heightStruct));
-			ZeroMemory(height1, sizeof(height1));
-			ZeroMemory(height2, sizeof(height2));
-			ZeroMemory(massBox, sizeof(massBox));
-			ZeroMemory(bmiValueStr, sizeof(bmiValueStr));
 
 			GetDlgItemTextW(hWnd, IDC_HEIGHT1, height1, 4);
 			GetDlgItemTextW(hWnd, IDC_HEIGHT2, height2, 3);
-			GetDlgItemTextW(hWnd, IDC_MASS, massBox, 4);
+			GetDlgItemTextW(hWnd, IDC_MASS1, mass1, 4);
+			GetDlgItemTextW(hWnd, IDC_MASS2, mass2, 4);
 
-			heightStruct.cmFt = (unsigned int)wcstol(height1, 0, 10);
-			heightStruct.in = (unsigned int)wcstol(height2, 0, 10);
-			mass = (unsigned int)wcstol(massBox, 0, 10);
+			heightStruct.cmFt = wcstol(height1, 0, 10);
+			heightStruct.in = wcstol(height2, 0, 10);
+			massStruct.kgLbsSt = wcstol(mass1, 0, 10);
+			massStruct.lbs = wcstol(mass2, 0, 10);
 
-			if ((heightStruct.cmFt == 0 && heightStruct.in == 0) || mass == 0)
+			if ((heightStruct.cmFt == 0 && heightStruct.in == 0) ||
+				(massStruct.kgLbsSt + massStruct.lbs) == 0)
 			{
-				MessageBoxW(hWnd, strIncorrect, strValue, MB_ICONERROR);
+				MessageBoxW(hWnd, strIncorrect, strValue, MB_ICONWARNING);
 				clearTextBoxes(hWnd);
 				break;
 			}
 
-			bmiValue = BMICalculate(heightStruct, mass);
+			bmiValue = BMICalculate(heightStruct, massStruct);
 
 			swprintf(bmiValueStr, 5, L"%.1f", bmiValue);
 			MessageBoxW(hWnd, bmiValueStr, strValue, MB_OK);
 
 			clearTextBoxes(hWnd);
+
 		}
 			return TRUE;
 
@@ -200,8 +236,12 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			BMIUnits = BMIMetric;
 			break;
 
-		case IDM_IMPERIAL:
-			BMIUnits = BMIImperial;
+		case IDM_IMPERIAL_US:
+			BMIUnits = BMIImperialUS;
+			break;
+
+		case IDM_IMPERIAL_UK:
+			BMIUnits = BMIImperialUK;
 			break;
 
 		case IDM_ABOUT:

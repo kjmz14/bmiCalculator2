@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.24)
 
-project(bmiCalculator2 VERSION 1.0.6)
+project(bmiCalculator2 VERSION 1.1.0)
 
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -47,7 +47,8 @@ if (MSVC) # MSVC, Clang-cl
 
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /W4 /MP")
 
-    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /WX /O2 /GL")
+    # This /arch flag is used only for x86 builds
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /WX /O2 /GL /arch:IA32")
 
     if (MSVC_VERSION GREATER_EQUAL 1920) # Visual Studio 2019 or newer
         set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /Ob3")
@@ -64,6 +65,6 @@ else () # MinGW
 
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-value -municode -mwindows")
 
-    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Werror -O3 -s -static")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Werror -O3 -s -static -Wl,--major-subsystem-version,6,--minor-subsystem-version,1")
 
 endif ()
