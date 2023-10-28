@@ -41,7 +41,7 @@ Note: These instructions are for creating builds which replicate the pre-compile
 mkdir build
 cd build
 cmake -G "Visual Studio 17 2022" .. # Replace "Visual Studio 17 2022" with your VS version if needed
-msbuild bmiCalculator2.sln /p:Configuration = Release
+msbuild bmiCalculator2.sln /p:Configuration=Release
 ```
 
 5. Enjoy! The binary will be located in the "Release" folder
