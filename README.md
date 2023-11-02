@@ -46,10 +46,11 @@ msbuild bmiCalculator2.sln /p:Configuration=Release
 
 5. Enjoy! The binary will be located in the "Release" folder
 
-Currently, you need Visual Studio to build.
+Currently, you need Visual Studio to build the 'master' branch.
 MinGW is not supported because windres does not support .rc files encoded in UTF16-LE which is required for non-ANSI
 characters in resources.
 CMakeLists.txt includes build flags for MinGW for future use.
+You can use the 'englishonly' branch if you want to build with MinGW.
 
 ## License
 
