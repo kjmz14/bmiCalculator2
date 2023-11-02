@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(bmiCalculator2 VERSION 1.1.0)
+project(bmiCalculator2 VERSION 1.1.1)
 
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_STANDARD_REQUIRED ON)

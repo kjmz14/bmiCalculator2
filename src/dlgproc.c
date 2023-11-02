@@ -214,7 +214,7 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			massStruct.kgLbsSt = wcstol(mass1, 0, 10);
 			massStruct.lbs = wcstol(mass2, 0, 10);
 
-			if ((heightStruct.cmFt == 0 && heightStruct.in == 0) ||
+			if ((heightStruct.cmFt + heightStruct.in) == 0 ||
 				(massStruct.kgLbsSt + massStruct.lbs) == 0)
 			{
 				MessageBoxW(hWnd, strIncorrect, strValue, MB_ICONWARNING);
