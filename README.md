@@ -1,7 +1,6 @@
 # bmiCalculator2 - A simple BMI Calculator for Windows written in ANSI C
 
-![Screenshot English](screenshot_en.png)
-![Screenshot Polish](screenshot_pl.png)
+![Screenshot](screenshot.png)
 
 ### Supported languages
 
