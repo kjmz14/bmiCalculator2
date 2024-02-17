@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Karol Zimmer
+ * Copyright (c) 2023-2024 Karol Zimmer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	HANDLE hMutex = CreateMutexW(NULL, FALSE, L"!BMICalculator2!");
 
-	if (GetLastError() != 0)
+	if (GetLastError())
 		return 0;
 
 	hInst = hInstance;

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Karol Zimmer
+ * Copyright (c) 2023-2024 Karol Zimmer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ double BMICalculate(BMIHeightStruct height, BMIMassStruct mass)
 
 	if (BMIUnits == BMIMetric)
 	{
-		if (height.cmFt == 0)
+		if (!height.cmFt)
 			return 0;
 
 		double m = (double)height.cmFt / 100;
@@ -43,7 +43,7 @@ double BMICalculate(BMIHeightStruct height, BMIMassStruct mass)
 
 	height.in += 12 * height.cmFt;
 
-	if (height.in == 0)
+	if (!height.in)
 		return 0;
 
 	if (BMIUnits == BMIImperialUK)

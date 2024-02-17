@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Karol Zimmer
+ * Copyright (c) 2023-2024 Karol Zimmer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -122,6 +122,18 @@ skipSwitch:
 
 }
 
+static void setFocusOnTheFirst(HWND hWnd)
+{
+
+	static HWND hControl = NULL;
+
+	if (!hControl)
+		hControl = GetDlgItem(hWnd, IDC_HEIGHT1);
+
+	SetFocus(hControl);
+
+}
+
 INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 
@@ -204,6 +216,8 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			WCHAR height1[4], height2[3], mass1[4], mass2[2], bmiValueStr[5];
 			double bmiValue;
 
+			setFocusOnTheFirst(hWnd);
+
 			GetDlgItemTextW(hWnd, IDC_HEIGHT1, height1, 4);
 			GetDlgItemTextW(hWnd, IDC_HEIGHT2, height2, 3);
 			GetDlgItemTextW(hWnd, IDC_MASS1, mass1, 4);
@@ -214,8 +228,8 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			massStruct.kgLbsSt = wcstol(mass1, 0, 10);
 			massStruct.lbs = wcstol(mass2, 0, 10);
 
-			if ((heightStruct.cmFt + heightStruct.in) == 0 ||
-				(massStruct.kgLbsSt + massStruct.lbs) == 0)
+			if (!(heightStruct.cmFt + heightStruct.in) ||
+				!(massStruct.kgLbsSt + massStruct.lbs))
 			{
 				MessageBoxW(hWnd, strIncorrect, strValue, MB_ICONWARNING);
 				clearTextBoxes(hWnd);
@@ -231,6 +245,7 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			return TRUE;
 
 		case IDABORT: /* Clear button */
+			setFocusOnTheFirst(hWnd);
 			clearTextBoxes(hWnd);
 			return TRUE;
 
