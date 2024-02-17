@@ -5,7 +5,8 @@
 ### Supported languages
 
 * English
-* Polish
+
+This branch contains English-only version. Check 'master' for other languages.
 
 Supports both metric and imperial (US & UK) unit systems.
 
@@ -29,10 +30,10 @@ Note: These instructions are for creating builds which replicate the pre-compile
   CMakeLists.txt, but
   I didn't test)
 
-### How to build
+### How to build (MSVC)
 
 1. Download or clone this repository
-2. Open Developer PowerShell for VS 2022 (or Developer Powershell for your version of VS)
+2. Open Developer PowerShell for VS 2022 (or Developer PowerShell for your version of VS)
 3. Change directory (cd) to the path containing source tree
 4. Type:
 
@@ -44,12 +45,6 @@ msbuild bmiCalculator2.sln /p:Configuration=Release
 ```
 
 5. Enjoy! The binary will be located in the "Release" folder
-
-Currently, you need Visual Studio to build the 'master' branch.
-MinGW is not supported because windres does not support .rc files encoded in UTF16-LE which is required for non-ANSI
-characters in resources.
-CMakeLists.txt includes build flags for MinGW for future use.
-You can use the 'englishonly' branch if you want to build with MinGW.
 
 ## License
 
