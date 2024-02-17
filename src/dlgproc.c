@@ -213,7 +213,7 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			BMIHeightStruct heightStruct;
 			BMIMassStruct massStruct;
-			WCHAR height1[4], height2[3], mass1[4], mass2[2], bmiValueStr[5];
+			WCHAR height1[4], height2[3], mass1[4], mass2[4], bmiValueStr[5];
 			double bmiValue;
 
 			setFocusOnTheFirst(hWnd);
