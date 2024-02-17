@@ -219,17 +219,19 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				MessageBoxW(hWnd, strIncorrect, strValue, MB_ICONWARNING);
 				clearTextBoxes(hWnd);
-				break;
+				return TRUE;
 			}
 
 			bmiValue = BMICalculate(heightStruct, massStruct);
 
 			swprintf(bmiValueStr, 5, L"%.1f", bmiValue);
 			MessageBoxW(hWnd, bmiValueStr, strValue, MB_OK);
-
 			clearTextBoxes(hWnd);
-
 		}
+			return TRUE;
+
+		case IDABORT: /* Clear button */
+			clearTextBoxes(hWnd);
 			return TRUE;
 
 		case IDM_METRIC:
@@ -255,6 +257,7 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		updateMenu(hMenu);
 		updateControls(hWnd);
+
 		break;
 
 	case WM_CLOSE:
