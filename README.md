@@ -7,7 +7,7 @@
 * English
 * Polish
 
-#### Supports both metric and imperial (US & UK) unit systems.
+Supports both metric and imperial (US & UK) unit systems.
 
 ## Requirements for pre-compiled binaries
 
