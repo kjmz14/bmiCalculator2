@@ -32,7 +32,7 @@ Note: These instructions are for creating builds which replicate the pre-compile
 ### How to build
 
 1. Download or clone this repository
-2. Open Developer PowerShell for VS 2022 (or Developer Powershell for your version of VS)
+2. Open Developer PowerShell for VS 2022 (or Developer PowerShell for your version of VS)
 3. Change directory (cd) to the path containing source tree
 4. Type:
 
