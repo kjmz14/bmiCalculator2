@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023 Karol Zimmer
+ * Copyright (c) 2023-2024 Karol Zimmer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ STRING strCm, strKg, strFt,
 
 extern HINSTANCE hInst;
 
-#define LOAD_STR(a, b) LoadStringW(hInst, a, b, sizeof(STRING)/sizeof(WCHAR))
+#define LOAD_STR(a, b) LoadStringW(hInst, a, b, ARRAYSIZE(b))
 
 void BC2StringsLoad()
 {
