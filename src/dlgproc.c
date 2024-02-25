@@ -218,10 +218,10 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			setFocusOnTheFirst(hWnd);
 
-			GetDlgItemTextW(hWnd, IDC_HEIGHT1, height1, 4);
-			GetDlgItemTextW(hWnd, IDC_HEIGHT2, height2, 3);
-			GetDlgItemTextW(hWnd, IDC_MASS1, mass1, 4);
-			GetDlgItemTextW(hWnd, IDC_MASS2, mass2, 4);
+			GetDlgItemTextW(hWnd, IDC_HEIGHT1, height1, ARRAYSIZE(height1));
+			GetDlgItemTextW(hWnd, IDC_HEIGHT2, height2, ARRAYSIZE(height2));
+			GetDlgItemTextW(hWnd, IDC_MASS1, mass1, ARRAYSIZE(mass1));
+			GetDlgItemTextW(hWnd, IDC_MASS2, mass2, ARRAYSIZE(mass2));
 
 			heightStruct.cmFt = wcstol(height1, 0, 10);
 			heightStruct.in = wcstol(height2, 0, 10);
