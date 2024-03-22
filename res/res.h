@@ -39,21 +39,21 @@
 #define IDD_ABOUT 502
 
 /* Main dialog */
-#define IDC_HEIGHT1 502
-#define IDC_HEIGHT1_LABEL 503
-#define IDC_HEIGHT2 504
-#define IDC_HEIGHT2_LABEL 505
-#define IDC_MASS1 506
-#define IDC_MASS1_LABEL 507
-#define IDC_MASS2 508
-#define IDC_MASS2_LABEL 509
+#define IDC_HEIGHT1 503
+#define IDC_HEIGHT1_LABEL 504
+#define IDC_HEIGHT2 505
+#define IDC_HEIGHT2_LABEL 506
+#define IDC_MASS1 507
+#define IDC_MASS1_LABEL 508
+#define IDC_MASS2 509
+#define IDC_MASS2_LABEL 510
 
 /* About */
-#define IDC_DUMMY1 510
-#define IDC_DUMMY2 511
-#define IDC_DUMMY3 512
-#define IDC_DUMMY4 513
-#define IDC_DUMMY5 514
+#define IDC_DUMMY1 511
+#define IDC_DUMMY2 512
+#define IDC_DUMMY3 513
+#define IDC_DUMMY4 514
+#define IDC_DUMMY5 515
 
 /* Menu */
 #define IDM_BMI 100
