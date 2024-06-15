@@ -159,19 +159,20 @@ INT_PTR CALLBACK DlgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		SetMenu(hWnd, hMenu);
 		/* Window height */
 		{
-			int menuHeight = GetSystemMetrics(SM_CYMENU);
-
+			int menuHeight = GetSystemMetrics(SM_CYMENU),
+				newHeight;
 			RECT rect;
+
 			GetWindowRect(hWnd, &rect);
 
-			int newWindowHeight = menuHeight + rect.bottom - rect.top;
+			newHeight = menuHeight + rect.bottom - rect.top;
 
 			SetWindowPos(hWnd,
 				NULL,
 				rect.left,
 				rect.top,
 				rect.right - rect.left,
-				newWindowHeight,
+				newHeight,
 				SWP_NOMOVE | SWP_NOZORDER);
 		}
 		/* Text boxes limits (universal for both unit systems) */
